@@ -13,5 +13,5 @@ Credits: https://www.linkedin.com/in/nick-singh-tech
 
 SELECT EXTRACT(MONTH FROM submit_date) AS month, product_id, ROUND(AVG(stars), 2) AS avg_rating
 FROM reviews
-GROUP BY month, product_id
+GROUP BY EXTRACT(MONTH FROM submit_date), product_id
 ORDER BY month, product_id;
