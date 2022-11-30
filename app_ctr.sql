@@ -17,12 +17,12 @@ Credits: https://www.linkedin.com/in/nick-singh-tech
 /*My solution:*/
 
 SELECT t.app_id, ROUND(100.0 * t.clk / t.imp,2) AS ctr
-FROM (SELECT app_id,
-    SUM(CASE WHEN event_type = 'impression' THEN 1 ELSE 0 END) AS IMP,
-    SUM(CASE WHEN event_type = 'click' THEN 1 ELSE 0 END) AS CLK
-    FROM events
-    WHERE timestamp >= '2022-01-01'
-    AND timestamp <= '2022-12-31'
-    GROUP BY app_id) AS t
-GROUP BY t.app_id, t.clk, t.imp
-ORDER BY t.app_id;
+	FROM (SELECT app_id,
+    	SUM(CASE WHEN event_type = 'impression' THEN 1 ELSE 0 END) AS imp,
+    	SUM(CASE WHEN event_type = 'click' THEN 1 ELSE 0 END) AS clk
+    	FROM events
+     	WHERE timestamp >= '2022-01-01'
+    	AND timestamp <= '2022-12-31'
+    	GROUP BY app_id) AS t
+	GROUP BY t.app_id, t.clk, t.imp
+	ORDER BY t.app_id;

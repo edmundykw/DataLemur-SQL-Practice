@@ -13,8 +13,8 @@ Credits: https://www.linkedin.com/in/nick-singh-tech
 
 /*My solution:*/
 SELECT COUNT(device_type) AS laptop_views,
-(SELECT COUNT(device_type)
-FROM viewership
-WHERE device_type IN ('tablet', 'phone')) AS mobile_views
-FROM viewership
-WHERE device_type = 'laptop';
+	(SELECT COUNT(device_type)
+		FROM viewership
+	 	WHERE device_type IN ('tablet', 'phone')) AS mobile_views
+	FROM viewership
+ 	WHERE device_type = 'laptop';
