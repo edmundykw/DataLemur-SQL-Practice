@@ -14,8 +14,6 @@ Credits: https://www.linkedin.com/in/nick-singh-tech
 */
 
 /*My solution:*/
-
-
 SELECT COUNT(DISTINCT(jl1.company_id))
 FROM job_listings AS jl1
 LEFT JOIN job_listings AS jl2
