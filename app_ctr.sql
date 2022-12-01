@@ -26,3 +26,8 @@ SELECT t.app_id, ROUND(100.0 * t.clk / t.imp,2) AS ctr
     	GROUP BY app_id) AS t
 	GROUP BY t.app_id, t.clk, t.imp
 	ORDER BY t.app_id;
+
+/* Key takeaway 
+For questions that require mathematical manipulation, it's important to transform text fields to 
+numerical. This makes it easier to apply math operations on the data in the column.
+*/
