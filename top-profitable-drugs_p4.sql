@@ -21,7 +21,8 @@ WHERE ranks.rank < 3
 
 /*My solution using CTE:*/
 WITH ranks AS (
-  SELECT *,
+  SELECT manufacturer,
+  drug,
   rank() OVER (
     PARTITION BY manufacturer 
     ORDER BY units_sold DESC) 
