@@ -19,7 +19,7 @@ FROM
   FROM pharmacy_sales) AS ranks
 WHERE ranks.rank < 3
 
-/*My solution using CTE*/
+/*My solution using CTE:*/
 WITH ranks AS (
   SELECT *,
   rank() OVER (
