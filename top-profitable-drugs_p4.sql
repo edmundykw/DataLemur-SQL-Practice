@@ -12,7 +12,8 @@ Credits: https://www.linkedin.com/in/nick-singh-tech
 /*My solution using subquery:*/
 SELECT ranks.manufacturer, drug
 FROM
-  (SELECT *,
+  (SELECT manufacturer,
+  drug,
   rank() OVER (
     PARTITION BY manufacturer 
     ORDER BY units_sold DESC) 
