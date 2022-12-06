@@ -12,7 +12,7 @@ Source: https://datalemur.com/questions/second-day-confirmation
 Credits: https://www.linkedin.com/in/nick-singh-tech
 */
 
-/*My solution using subquery:*/
+/*My solution:*/
 SELECT user_id
 FROM emails
 INNER JOIN texts
