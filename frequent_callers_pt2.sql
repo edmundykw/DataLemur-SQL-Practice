@@ -12,7 +12,7 @@ Source:https://datalemur.com/questions/uncategorized-calls-percentage
 Credits: https://www.linkedin.com/in/nick-singh-tech
 */
 
-/*My solution using subquery:*/
+/*My solution using CTE:*/
 WITH uncategorised_calls AS
   (SELECT COUNT(*) AS uncategorised_calls
   FROM callers
@@ -21,3 +21,9 @@ WITH uncategorised_calls AS
   
 SELECT ROUND((SELECT * FROM uncategorised_calls) * 100.0 / COUNT(*), 1) AS pct_uncat  
 FROM callers
+
+/*My solution using subquery :*/
+SELECT ROUND(COUNT(case_id) * 100.0 / (SELECT COUNT(case_id) FROM callers), 1) AS uncategorised_calls
+FROM callers
+WHERE call_category IS NULL 
+OR call_category = 'n/a';
