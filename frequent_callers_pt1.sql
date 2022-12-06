@@ -10,7 +10,7 @@ Source: https://datalemur.com/questions/frequent-callers
 Credits: https://www.linkedin.com/in/nick-singh-tech
 */
 
-/*My solution using subquery:*/
+/*My solution using CTE:*/
 WITH unique_calls AS 
   (SELECT COUNT(DISTINCT(policy_holder_id)) AS members
   FROM callers
