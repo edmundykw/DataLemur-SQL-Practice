@@ -21,4 +21,4 @@ WITH trans_rank AS
     
 SELECT user_id, spend, transaction_date
 FROM trans_rank
-WHERE trans_rank.rank = 3;
+WHERE rank = 3;
