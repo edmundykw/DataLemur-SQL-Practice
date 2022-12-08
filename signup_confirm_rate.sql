@@ -16,13 +16,13 @@ Credits: https://www.linkedin.com/in/nick-singh-tech
 */
 
 /*My solution:*/
-WITH signups AS
+WITH status AS
   (SELECT
-    SUM(CASE WHEN signup_action = 'Confirmed' THEN 1 ELSE 0 END) AS confirmed,
-    COUNT(*) AS total_signups
-    FROM emails
-    INNER JOIN texts
-    ON emails.email_id = texts.email_id)
+    CASE WHEN signup_action = 'Confirmed' THEN 1 ELSE 0 END AS confirm_stat
+    FROM emails AS e
+    LEFT JOIN texts AS t
+    ON e.email_id = t.email_id
+    AND t.signup_action = 'Confirmed')
     
-SELECT ROUND(confirmed::Decimal / total_signups, 2) AS confirm_rate
-FROM signups;
+SELECT ROUND(SUM(confirm_stat)::Decimal / COUNT(*), 2) AS pct_activation
+FROM status;
