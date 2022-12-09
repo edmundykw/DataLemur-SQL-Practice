@@ -34,7 +34,7 @@ WITH appearances_count AS
     
   artist_rank AS
     (SELECT artist_name,
-       (SELECT COUNT(*) FROM appearances_count) - appearances AS ranking
+       (SELECT COUNT(*) FROM appearances_count) - appearances AS ranking /*For this question, this method works. But it's better to use DENSE_RANK.*/
           FROM appearances_count
           GROUP BY artist_name, appearances
           ORDER BY appearances DESC)
