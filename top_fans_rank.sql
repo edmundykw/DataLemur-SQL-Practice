@@ -42,3 +42,26 @@ WITH appearances_count AS
 SELECT artist_name, ranking
 FROM artist_rank
 WHERE ranking <= 5
+
+/*Solution using DENSE_RANK()*/
+WITH appearances_count AS
+  (SELECT artist_name, COUNT(s.song_id) AS appearances
+    FROM artists AS a
+    INNER JOIN songs AS s
+    ON a.artist_id = s.artist_id
+    INNER JOIN global_song_rank AS gsr
+    ON gsr.song_id = s.song_id
+    WHERE rank <= 10
+    GROUP BY artist_name
+    ORDER BY COUNT(s.song_id) DESC),
+    
+  artist_rank AS
+    (SELECT artist_name,
+            DENSE_RANK() OVER(
+              ORDER BY appearances DESC
+            ) AS ranking
+      FROM appearances_count)
+
+SELECT *
+FROM artist_rank
+WHERE ranking <= 5
