@@ -49,3 +49,5 @@ WITH weekly_counts AS
 SELECT user_id, song_id, past_plays + weekly_count AS song_plays
 FROM sum_of_plays
 ORDER BY song_plays DESC;
+
+/*Consider union all to shorten the code.*/
