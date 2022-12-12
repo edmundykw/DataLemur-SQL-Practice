@@ -16,12 +16,12 @@ Credits: https://www.linkedin.com/in/nick-singh-tech
 
 /*My solution:*/
 WITH grouped AS
-(SELECT 
-    product_id,
-    category,
-    name,
-    COUNT(category) OVER (ORDER BY product_id) AS category_group
-    FROM products)
+	(SELECT 
+    	product_id,
+    	category,
+    	name,
+    	COUNT(category) OVER (ORDER BY product_id) AS category_group
+    	FROM products)
     
 SELECT
   product_id,
