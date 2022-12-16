@@ -30,5 +30,5 @@ WITH rolling_tweets AS
     FROM tweets
     GROUP BY user_id, tweet_date)
 
-SELECT user_id, tweet_date, ROUND(rolling_avg,2)
+SELECT user_id, tweet_date, ROUND(rolling_avg,2) AS rolling_avg
 FROM rolling_tweets;
