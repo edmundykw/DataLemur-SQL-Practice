@@ -45,3 +45,19 @@ FROM odd AS o
 INNER JOIN even AS e  
 ON o.measurement_day = e.measurement_day
 ORDER BY o.measurement_day
+
+/*Alternative solution*/
+
+WITH time_rank AS
+  (SELECT
+    measurement_time::date AS measurement_day,
+    measurement_value,
+    RANK() OVER(PARTITION BY measurement_time::date ORDER BY measurement_time) AS ranking
+    FROM measurements)
+    
+SELECT
+  measurement_day,
+  SUM(CASE WHEN ranking % 2 != 0 THEN measurement_value ELSE 0 END) AS odd_sum,
+  SUM(CASE WHEN ranking % 2 = 0 THEN measurement_value ELSE 0 END) AS even_sum
+FROM time_rank
+GROUP BY measurement_day;
