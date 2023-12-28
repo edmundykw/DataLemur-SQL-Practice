@@ -2,33 +2,26 @@
 Question: 
 
 This is the same question as problem #10 in the SQL Chapter of Ace the Data Science Interview!
-The table below contains information about tweets over a given period of time.
-Calculate the 3-day rolling average of tweets published by each user for each date that a tweet was posted.
-Output the user id, tweet date, and rolling averages rounded to 2 decimal places.
 
-Important Assumptions:
-- Rows in this table are consecutive and ordered by date.
-- Each row represents a different day
-- A day that does not correspond to a row in this table is not counted. The most recent day is the next row above the current row.
+Given a table of tweet data over a specified time period, calculate the 3-day rolling average of tweets for each user.
+Output the user ID, tweet date, and rolling averages rounded to 2 decimal places.
 
-Note: Rolling average is a metric that helps us analyze data points by creating a series of averages based on different subsets of a dataset.
-It is also known as a moving average, running average, moving mean, or rolling mean.
+Notes:
+
+A rolling average, also known as a moving average or running mean is a time-series technique that examines trends in data over a specified period of time.
+In this case, we want to determine how the tweet count for each user changes over a 3-day period.
 
 Source: https://datalemur.com/questions/rolling-average-tweets
 Credits: https://www.linkedin.com/in/nick-singh-tech
 */
 
 /*My solution:*/
-WITH rolling_tweets AS 
-  (SELECT 
-    user_id,
-    tweet_date,
-    AVG(COUNT(tweet_id)) OVER(
-		PARTITION BY user_id
-		ORDER BY tweet_date,
-		tweet_date rows between 2 preceding and current row) AS rolling_avg
-    FROM tweets
-    GROUP BY user_id, tweet_date)
+SELECT user_id,
+       tweet_date,
+        ROUND(AVG(tweet_count) OVER(
+        PARTITION BY user_id
+        ORDER BY tweet_date DESC
+        ROWS BETWEEN CURRENT ROW AND 2 FOLLOWING), 2) AS avg_3day_tweet_count
+FROM tweets
+ORDER BY user_id, tweet_date;
 
-SELECT user_id, tweet_date, ROUND(rolling_avg,2) AS rolling_avg
-FROM rolling_tweets;
